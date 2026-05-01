@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gator Path | SF State</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --purple:       #4E2A84;
+      --purple-dim:   #3D2068;
+      --purple-tint:  #f3effe;
+      --gold:         #C99700;
+      --gold-bright:  #E8AE00;
+      --ink:          #18151f;
+      --ink-2:        #52496b;
+      --ink-muted:    #8c84a3;
+      --surface:      #faf9fc;
+      --surface-2:    #f2f0f7;
+      --line:         #e8e4f0;
+      --white:        #ffffff;
+      --radius-sm:    8px;
+      --radius:       14px;
+      --radius-lg:    20px;
+      --f-sans:       'DM Sans', system-ui, sans-serif;
+      --f-serif:      'DM Serif Display', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--f-sans);
+      background: var(--surface);
+      color: var(--ink);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01" 1;
+    }
+
+    ul  { list-style: none; }
+    a   { color: var(--purple); }
+    a:hover { opacity: 0.75; }
+    .hidden { display: none !important; }
+
+    /* ─────────────────────────────────────────
+       ONBOARDING
+    ───────────────────────────────────────── */
+
+    #onboarding {
+      min-height: 100vh;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+
+    .onboarding-inner {
+      max-width: 560px;
+      width: 100%;
+      animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    /* Brand lockup */
+    .onboarding-brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 44px;
+    }
+
+    .onboarding-logo {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .onboarding-brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .onboarding-title {
+      font-family: var(--f-serif);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--purple);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .onboarding-tagline {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* Step indicators */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+
+    .step-pip {
+      height: 3px;
+      border-radius: 99px;
+      transition: all 0.25s ease;
+    }
+
+    .step-pip.active  { width: 28px; background: var(--purple); }
+    .step-pip.inactive { width: 14px; background: var(--line); }
+
+    /* Question */
+    .step-question {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    /* Back button */
+    .step-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      font-family: var(--f-sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 20px;
+      transition: color 0.15s;
+    }
+    .step-back:hover { color: var(--ink); }
+    .step-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    /* Tiles */
+    .status-tiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .tile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      padding: 24px 20px 20px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--f-sans);
+      transition: border-color 0.16s, box-shadow 0.16s, transform 0.16s;
+    }
+
+    .tile:hover {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 4px rgba(78,42,132,0.08), 0 4px 20px rgba(78,42,132,0.1);
+      transform: translateY(-2px);
+    }
+
+    .tile:active { transform: translateY(0); box-shadow: none; }
+
+    .tile-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+
+    .tile-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .tile-sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+
+    #step-1, #step-2 { animation: fadeUp 0.3s cubic-bezier(0.22,1,0.36,1) both; }
+
+    /* ─────────────────────────────────────────
+       APP SHELL
+    ───────────────────────────────────────── */
+
+    #app {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .app-header {
+      background: var(--purple);
+      padding: 0 24px;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-title {
+      font-family: var(--f-serif);
+      font-size: 26px;
+      color: white;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .type-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
+    .reset-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      font-family: var(--f-sans);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .reset-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* Tab bar */
+    .tab-bar {
+      background: var(--white);
+      display: flex;
+      border-bottom: 1px solid var(--line);
+      padding: 0 24px;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .tab-btn {
+      padding: 0 20px;
+      height: 46px;
+      font-family: var(--f-sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      cursor: pointer;
+      transition: color 0.18s, border-color 0.18s;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active {
+      color: var(--purple);
+      border-bottom-color: var(--purple);
+      font-weight: 700;
+    }
+
+    /* Panels */
+    .panels {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .tab-panel {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+    .tab-panel.active { display: flex; }
+
+    /* ─────────────────────────────────────────
+       CHECKLIST TAB
+    ───────────────────────────────────────── */
+
+    .checklist-header {
+      padding: 20px 24px 16px;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    .checklist-title {
+      font-family: var(--f-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    .checklist-sub {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    /* Progress */
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-bar-track {
+      flex: 1;
+      height: 5px;
+      background: var(--surface-2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--purple);
+      border-radius: 99px;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      white-space: nowrap;
+      min-width: 110px;
+      text-align: right;
+    }
+
+    /* List */
+    .checklist {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 20px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .checklist-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      padding: 20px 4px 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .checklist-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+    .checklist-section-label:first-child { padding-top: 8px; }
+
+    .checklist-item {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1.5px solid var(--line);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .checklist-item:hover {
+      border-color: var(--purple);
+      box-shadow: 0 2px 8px rgba(78,42,132,0.08);
+    }
+    .checklist-item.checked { opacity: 0.45; }
+
+    .item-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      cursor: pointer;
+      min-width: 0;
+    }
+
+    .item-checkbox {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+      pointer-events: none;
+    }
+
+    .item-check-icon {
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--line);
+      border-radius: 5px;
+      flex-shrink: 0;
+      position: relative;
+      background: var(--white);
+      transition: background 0.16s, border-color 0.16s;
+    }
+    .item-label:hover .item-check-icon { border-color: var(--purple); }
+    .checklist-item.checked .item-check-icon {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+    .item-check-icon::after {
+      content: '';
+      position: absolute;
+      left: 5px; top: 2px;
+      width: 5px; height: 9px;
+      border: 1.5px solid white;
+      border-top: none; border-left: none;
+      transform: rotate(45deg) scale(0);
+      opacity: 0;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .checklist-item.checked .item-check-icon::after {
+      transform: rotate(45deg) scale(1);
+      opacity: 1;
+    }
+
+    .item-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .item-text {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      flex: 1;
+      min-width: 0;
+      line-height: 1.45;
+      transition: color 0.15s;
+    }
+    .checklist-item.checked .item-text {
+      text-decoration: line-through;
+      color: var(--ink-muted);
+    }
+
+    .item-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .item-link {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-decoration: none;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .item-link:hover {
+      color: var(--purple);
+      background: var(--purple-tint);
+      opacity: 1;
+    }
+
+    /* ─────────────────────────────────────────
+       RESOURCES TAB
+    ───────────────────────────────────────── */
+
+    .resources-header {
+      padding: 20px 24px 16px;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    .resources-title {
+      font-family: var(--f-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .resources-sub {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-muted);
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      padding: 16px 24px;
+      overflow-y: auto;
+      flex: 1;
+      align-content: start;
+    }
+
+    .resource-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1.5px solid var(--line);
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+      min-height: 64px;
+    }
+    .resource-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 4px 20px rgba(78,42,132,0.1);
+      transform: translateY(-2px);
+      text-decoration: none;
+      opacity: 1;
+    }
+
+    .resource-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .resource-card-arrow {
+      font-size: 16px;
+      color: var(--ink-muted);
+      flex-shrink: 0;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .resource-card:hover .resource-card-arrow {
+      transform: translate(2px, -2px);
+      color: var(--purple);
+    }
+
+    .resources-footer {
+      padding: 14px 28px 20px;
+      flex-shrink: 0;
+    }
+
+    .all-resources-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-decoration: none;
+    }
+    .all-resources-link:hover { color: var(--purple); opacity: 1; }
+
+    /* ─────────────────────────────────────────
+       CHAT TAB
+    ───────────────────────────────────────── */
+
+    #panel-chat {
+      background: var(--surface);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 20px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message { max-width: 82%; }
+    .message.bot  { align-self: flex-start; }
+    .message.user { align-self: flex-end; }
+
+    .message.bot p {
+      background: var(--white);
+      border-radius: 6px 16px 16px 16px;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--ink);
+      border: 1.5px solid var(--line);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .message.user p {
+      background: var(--purple);
+      border-radius: 16px 4px 16px 16px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: white;
+    }
+
+    .message a { color: var(--gold-bright); font-weight: 600; }
+    .message.user a { color: #d4b8ff; }
+
+    .chat-suggestions {
+      padding: 0 16px 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .suggestion-chip {
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-family: var(--f-sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all 0.16s;
+    }
+    .suggestion-chip:hover {
+      background: var(--purple-tint);
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 10px 16px 14px;
+      background: var(--white);
+      border-top: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    #chat-input {
+      flex: 1;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 9px 14px;
+      font-family: var(--f-sans);
+      font-size: 14px;
+      color: var(--ink);
+      background: var(--surface);
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    #chat-input:focus {
+      border-color: var(--purple);
+      background: var(--white);
+    }
+    #chat-input::placeholder { color: var(--ink-muted); }
+
+    #chat-send {
+      background: var(--purple);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      width: 40px;
+      height: 40px;
+      font-size: 17px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, transform 0.1s;
+    }
+    #chat-send:hover  { background: var(--purple-dim); }
+    #chat-send:active { transform: scale(0.92); }
+
+    /* ─────────────────────────────────────────
+       SCROLLBAR
+    ───────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; }
+
+    /* ─────────────────────────────────────────
+       ANIMATIONS
+    ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      body { overflow: auto; }
+      #app { height: auto; min-height: 100vh; overflow: visible; }
+      .panels { overflow: visible; height: auto; }
+      .tab-panel { height: auto; overflow: visible; }
+      .tab-panel.active { display: flex; }
+      .checklist { max-height: none; overflow: visible; }
+      .chat-messages { max-height: 50vh; }
+      .status-tiles { grid-template-columns: 1fr; }
+      .resource-grid { grid-template-columns: 1fr; }
+      .header-right { display: none; }
+      .type-badge { display: none; }
+      .onboarding-brand { margin-bottom: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════
+       ONBOARDING
+  ══════════════════════════════════ -->
+  <div id="onboarding">
+    <div class="onboarding-inner">
+
+      <div class="onboarding-brand">
+        <img src="logo.png" alt="Gator Path mascot" class="onboarding-logo" />
+        <div class="onboarding-brand-text">
+          <h1 class="onboarding-title">Gator Path</h1>
+          <p class="onboarding-tagline">Navigate · Connect · Succeed</p>
+        </div>
+      </div>
+
+      <div class="step-indicator">
+        <span class="step-pip active" id="dot-1"></span>
+        <span class="step-pip inactive" id="dot-2"></span>
+      </div>
+
+      <div id="step-1">
+        <p class="step-question">What is your student status?</p>
+        <div class="status-tiles">
+          <button class="tile" data-residency="resident">
+            <span class="tile-num">01</span>
+            <span class="tile-label">California Resident</span>
+            <span class="tile-sub">Lived in CA for 12+ months</span>
+          </button>
+          <button class="tile" data-residency="out-of-state">
+            <span class="tile-num">02</span>
+            <span class="tile-label">Out-of-State Student</span>
+            <span class="tile-sub">From another US state</span>
+          </button>
+          <button class="tile" data-residency="international">
+            <span class="tile-num">03</span>
+            <span class="tile-label">International Student</span>
+            <span class="tile-sub">Studying on a student visa</span>
+          </button>
+          <button class="tile" data-residency="other">
+            <span class="tile-num">04</span>
+            <span class="tile-label">Other / Not Sure</span>
+            <span class="tile-sub">Undocumented, AB540, or unsure</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="step-2" class="hidden">
+        <button class="step-back" id="step-back">Back</button>
+        <p class="step-question">Where are you in your studies?</p>
+        <div class="status-tiles">
+          <button class="tile" data-type="undecided-freshman">
+            <span class="tile-num">01</span>
+            <span class="tile-label">Undecided Freshman</span>
+            <span class="tile-sub">New to SF State, still exploring</span>
+          </button>
+          <button class="tile" data-type="declared-freshman-sophomore">
+            <span class="tile-num">02</span>
+            <span class="tile-label">Declared Freshman / Soph.</span>
+            <span class="tile-sub">I know my major</span>
+          </button>
+          <button class="tile" data-type="transfer">
+            <span class="tile-num">03</span>
+            <span class="tile-label">Transfer Student</span>
+            <span class="tile-sub">Coming from another school</span>
+          </button>
+          <button class="tile" data-type="junior-senior">
+            <span class="tile-num">04</span>
+            <span class="tile-label">Junior / Senior</span>
+            <span class="tile-sub">Headed toward graduation</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       APP
+  ══════════════════════════════════ -->
+  <div id="app" class="hidden">
+
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="logo.png" alt="Gator Path" class="header-logo" />
+        <span class="header-title">Gator Path</span>
+      </div>
+      <div class="header-right">
+        <span id="student-type-badge" class="type-badge"></span>
+        <button id="reset-btn" class="reset-btn">Start over</button>
+      </div>
+    </header>
+
+    <nav class="tab-bar" role="tablist">
+      <button class="tab-btn active" data-tab="checklist" role="tab">My Path</button>
+      <button class="tab-btn" data-tab="resources" role="tab">Resources</button>
+      <button class="tab-btn" data-tab="chat" role="tab">Ask Gator</button>
+    </nav>
+
+    <div class="panels">
+
+      <!-- CHECKLIST -->
+      <div id="panel-checklist" class="tab-panel active" role="tabpanel">
+        <div class="checklist-header">
+          <h2 class="checklist-title" id="checklist-title">Your Roadmap</h2>
+          <p class="checklist-sub" id="checklist-sub"></p>
+          <div class="progress-row">
+            <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <span class="progress-label" id="progress-label">0 complete</span>
+          </div>
+        </div>
+        <ul class="checklist" id="checklist" aria-label="Your personalized checklist"></ul>
+      </div>
+
+      <!-- RESOURCES -->
+      <div id="panel-resources" class="tab-panel" role="tabpanel">
+        <div class="resources-header">
+          <h2 class="resources-title">Campus Resources</h2>
+          <p class="resources-sub">Quick links to what you need at SF State</p>
+        </div>
+        <div class="resource-grid" id="resource-list" aria-label="SF State resources"></div>
+        <div class="resources-footer">
+          <a href="https://studentresources.sfsu.edu/resources" target="_blank" rel="noopener" class="all-resources-link">View all SF State resources →</a>
+        </div>
+      </div>
+
+      <!-- CHAT -->
+      <div id="panel-chat" class="tab-panel" role="tabpanel">
+        <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+          <div class="message bot">
+            <p>Hi! Ask me anything about SF State — FAFSA, advising, visas, declaring a major, graduation, and more.</p>
+          </div>
+        </div>
+        <div class="chat-suggestions" id="chat-suggestions" aria-label="Suggested questions">
+          <button class="suggestion-chip">How do I apply for FAFSA?</button>
+          <button class="suggestion-chip">What is EOP?</button>
+          <button class="suggestion-chip">How do I declare a major?</button>
+          <button class="suggestion-chip">What about my visa?</button>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Ask a question…" autocomplete="off" aria-label="Type your question" />
+          <button id="chat-send" aria-label="Send">→</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
