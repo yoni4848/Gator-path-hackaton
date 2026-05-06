@@ -2,6 +2,8 @@
 
 **A personalized student navigation app built at a hackathon to help SF State students find the resources they need.**
 
+🔗 **Live site:** https://gator-path.netlify.app/
+
 ## What is this?
 
 SF State has a lot of great resources — but finding the right ones for your specific situation can be overwhelming, especially when you're just getting started. Gator Path asks you two simple questions and gives you a personalized checklist of steps to take, the right office links, and a chat assistant to answer your questions.
