@@ -1,10 +1,10 @@
 const RESIDENCY_ITEMS = {
   'international': [
-    { id: 'int1', text: 'Connect with International Student Services (ISS)', link: 'https://iss.sfsu.edu', tag: 'Visa' },
-    { id: 'int2', text: 'Maintain your F-1 or J-1 visa status — report any changes to ISS immediately', link: 'https://iss.sfsu.edu', tag: 'Visa' },
-    { id: 'int3', text: 'Enroll in the mandatory SF State health insurance plan', link: 'https://health.sfsu.edu', tag: 'Health' },
-    { id: 'int4', text: 'Understand on-campus work authorization (F-1: up to 20 hrs/week)', link: 'https://iss.sfsu.edu', tag: 'Work' },
-    { id: 'int5', text: 'Apply for a Social Security Number or ITIN if needed', link: 'https://iss.sfsu.edu', tag: 'Admin' },
+    { id: 'int1', text: 'Connect with the Division of International Education for international student advising', link: 'https://international.sfsu.edu/contact-us', tag: 'Visa' },
+    { id: 'int2', text: 'Maintain your F-1 or J-1 visa status — report address and contact changes on time', link: 'https://international.sfsu.edu/maintaining-status', tag: 'Visa' },
+    { id: 'int3', text: 'Enroll in the mandatory SF State international student health insurance plan', link: 'https://international.sfsu.edu/healthinsurance', tag: 'Health' },
+    { id: 'int4', text: 'Understand on-campus work authorization for F-1 and J-1 students', link: 'https://international.sfsu.edu/ocec', tag: 'Work' },
+    { id: 'int5', text: 'Apply for a Social Security Number after you have work authorization', link: 'https://international.sfsu.edu/ssn', tag: 'Admin' },
   ],
   'out-of-state': [
     { id: 'oos1', text: 'Complete your FAFSA — federal aid applies to out-of-state students', link: 'https://financialaid.sfsu.edu/applying-financial-aid', tag: 'Financial Aid' },
@@ -17,8 +17,8 @@ const RESIDENCY_ITEMS = {
     { id: 'res2', text: 'Check your eligibility for the Middle Class Scholarship', link: 'https://financialaid.sfsu.edu/state-grants', tag: 'Financial Aid' },
   ],
   'other': [
-    { id: 'oth1', text: 'Apply via the California Dream Act (CADAA) if you are AB540-eligible', link: 'https://financialaid.sfsu.edu', tag: 'Financial Aid' },
-    { id: 'oth2', text: 'Connect with the Dreamers Resource Center for advising and support', link: 'https://dreamers.sfsu.edu', tag: 'Support' },
+    { id: 'oth1', text: 'Apply via the California Dream Act (CADAA) if you are AB540-eligible', link: 'https://financialaid.sfsu.edu/ab540', tag: 'Financial Aid' },
+    { id: 'oth2', text: 'Connect with the Dream Resource Center for advising and support', link: 'https://drc.sfsu.edu', tag: 'Support' },
     { id: 'oth3', text: 'Visit Financial Aid to explore all options available to you', link: 'https://financialaid.sfsu.edu', tag: 'Financial Aid' },
   ]
 };
@@ -28,15 +28,15 @@ const CHECKLISTS = {
     title: 'Undecided Freshman Roadmap',
     sub: "New to SF State and still figuring things out? Start here.",
     items: [
-      { id: 'uf1', text: 'Set up your SF State email and GatorLink account', link: 'https://its.sfsu.edu/gatorlink', tag: 'Getting Started' },
+      { id: 'uf1', text: 'Set up your SFSU account, email, and multi-factor authentication', link: 'https://web.sfsu.edu/account', tag: 'Getting Started' },
       { id: 'uf2', text: 'Register for New Student Orientation', link: 'https://activities.sfsu.edu/new-student-orientation', tag: 'Orientation' },
       { id: 'uf3', text: 'Apply for EOP (Educational Opportunity Program) if eligible', link: 'https://eop.sfsu.edu/how-apply', tag: 'Support' },
-      { id: 'uf4', text: 'Meet with an academic advisor to plan your first semester', link: 'https://eop.sfsu.edu/advising', tag: 'Advising' },
+      { id: 'uf4', text: 'Meet with an academic advisor to plan your first semester', link: 'https://advising.sfsu.edu', tag: 'Advising' },
       { id: 'uf5', text: 'Enroll in your first-semester classes via the Student Center', link: 'https://cms.sfsu.edu/student-center', tag: 'Registration' },
       { id: 'uf6', text: 'Explore major options in the SF State Bulletin', link: 'https://bulletin.sfsu.edu', tag: 'Academics' },
       { id: 'uf7', text: 'Visit Financial Aid to understand your award package', link: 'https://financialaid.sfsu.edu', tag: 'Financial Aid' },
-      { id: 'uf8', text: 'Get your Gator OneCard student ID', link: 'https://studentresources.sfsu.edu/resources', tag: 'Getting Started' },
-      { id: 'uf9', text: 'Join a club or student organization', link: 'https://studentresources.sfsu.edu/resources', tag: 'Campus Life' },
+      { id: 'uf8', text: 'Get your SF State OneCard student ID', link: 'https://onecard.sfsu.edu/students', tag: 'Getting Started' },
+      { id: 'uf9', text: 'Join a club or student organization', link: 'https://dos.sfsu.edu/student-organizations', tag: 'Campus Life' },
     ]
   },
   'declared-freshman-sophomore': {
@@ -44,12 +44,12 @@ const CHECKLISTS = {
     sub: "You know your major — now let's map out your path to graduation.",
     items: [
       { id: 'df1', text: 'Attend New Student Orientation', link: 'https://activities.sfsu.edu/new-student-orientation', tag: 'Orientation' },
-      { id: 'df2', text: 'Meet with your major advisor', link: 'https://eop.sfsu.edu/advising', tag: 'Advising' },
+      { id: 'df2', text: 'Meet with your major advisor', link: 'https://advising.sfsu.edu', tag: 'Advising' },
       { id: 'df3', text: 'Review your degree requirements in the SF State Bulletin', link: 'https://bulletin.sfsu.edu', tag: 'Academics' },
       { id: 'df4', text: 'Check your Degree Progress Report', link: 'https://registrar.sfsu.edu/dprguide', tag: 'Academics' },
       { id: 'df5', text: 'Apply for EOP if you are eligible', link: 'https://eop.sfsu.edu/how-apply', tag: 'Support' },
       { id: 'df6', text: 'Create a Handshake profile for internships and jobs', link: 'https://career.sfsu.edu', tag: 'Career' },
-      { id: 'df7', text: 'Join a major-related student organization', link: 'https://studentresources.sfsu.edu/resources', tag: 'Campus Life' },
+      { id: 'df7', text: 'Join a major-related student organization', link: 'https://dos.sfsu.edu/student-organizations', tag: 'Campus Life' },
       { id: 'df8', text: 'Understand your full financial aid package', link: 'https://financialaid.sfsu.edu', tag: 'Financial Aid' },
       { id: 'df9', text: 'Explore on-campus jobs and Work-Study opportunities', link: 'https://financialaid.sfsu.edu', tag: 'Financial Aid' },
     ]
@@ -60,13 +60,13 @@ const CHECKLISTS = {
     items: [
       { id: 'tr1', text: 'Check your transfer credit articulation on ASSIST.org', link: 'https://assist.org', tag: 'Transfer' },
       { id: 'tr2', text: 'Register for Transfer Student Orientation', link: 'https://activities.sfsu.edu/new-student-orientation', tag: 'Orientation' },
-      { id: 'tr3', text: 'Meet with your department advisor', link: 'https://eop.sfsu.edu/advising', tag: 'Advising' },
+      { id: 'tr3', text: 'Meet with your department advisor', link: 'https://advising.sfsu.edu', tag: 'Advising' },
       { id: 'tr4', text: 'Review your Degree Progress Report', link: 'https://registrar.sfsu.edu/dprguide', tag: 'Academics' },
       { id: 'tr5', text: 'Verify residency requirements for in-state tuition', link: 'https://registrar.sfsu.edu', tag: 'Admin' },
       { id: 'tr6', text: 'Explore Transfer Student resources', link: 'https://transfer.sfsu.edu', tag: 'Transfer' },
       { id: 'tr7', text: 'Create a Handshake profile for internship and job search', link: 'https://career.sfsu.edu', tag: 'Career' },
       { id: 'tr8', text: 'Learn about your priority registration date', link: 'https://registrar.sfsu.edu', tag: 'Registration' },
-      { id: 'tr9', text: 'Get your Gator OneCard student ID', link: 'https://cms.sfsu.edu/student-center', tag: 'Getting Started' },
+      { id: 'tr9', text: 'Get your SF State OneCard student ID', link: 'https://onecard.sfsu.edu/students', tag: 'Getting Started' },
     ]
   },
   'junior-senior': {
@@ -88,7 +88,7 @@ const CHECKLISTS = {
 
 const RESOURCES_BASE = [
   { label: 'Financial Aid', url: 'https://financialaid.sfsu.edu' },
-  { label: 'Academic Advising (EOP)', url: 'https://eop.sfsu.edu/advising' },
+  { label: 'Undergraduate Advising Center', url: 'https://advising.sfsu.edu' },
   { label: "Registrar's Office", url: 'https://registrar.sfsu.edu' },
   { label: 'Career & Leadership Dev.', url: 'https://career.sfsu.edu' },
   { label: 'New Student Orientation', url: 'https://activities.sfsu.edu/new-student-orientation' },
@@ -96,8 +96,10 @@ const RESOURCES_BASE = [
 
 const RESOURCES_BY_RESIDENCY = {
   'international': [
-    { label: 'International Student Services', url: 'https://iss.sfsu.edu' },
-    { label: 'Student Health Services', url: 'https://health.sfsu.edu' },
+    { label: 'Division of International Education', url: 'https://international.sfsu.edu' },
+    { label: 'Visa & Immigration', url: 'https://international.sfsu.edu/visa-and-immigration' },
+    { label: 'International Health Insurance', url: 'https://international.sfsu.edu/healthinsurance' },
+    { label: 'International Student Advising', url: 'https://international.sfsu.edu/contact-us' },
   ],
   'out-of-state': [
     { label: 'Residency Reclassification', url: 'https://registrar.sfsu.edu' },
@@ -106,7 +108,7 @@ const RESOURCES_BY_RESIDENCY = {
     { label: 'State Grants (Cal Grant)', url: 'https://financialaid.sfsu.edu/state-grants' },
   ],
   'other': [
-    { label: 'Dreamers Resource Center', url: 'https://dreamers.sfsu.edu' },
+    { label: 'Dream Resource Center', url: 'https://drc.sfsu.edu' },
   ]
 };
 
@@ -121,7 +123,7 @@ const FAQS = [
   },
   {
     keywords: ['advisor', 'advising', 'counselor', 'appointment', 'adviser'],
-    answer: "<strong>Meeting with an Academic Advisor:</strong><br><br>SF State offers advising through:<br>· <strong>EOP Advising</strong> — for first-gen and eligible students<br>· <strong>Department Advisors</strong> — specific to your major<br><br><a href='https://eop.sfsu.edu/advising' target='_blank'>EOP Advising →</a>"
+    answer: "<strong>Meeting with an Academic Advisor:</strong><br><br>SF State offers advising through:<br>· <strong>Undergraduate Advising Center</strong> — for general education, major exploration, and academic planning<br>· <strong>EOP Academic Counseling</strong> — for EOP students<br>· <strong>Department Advisors</strong> — specific to your major<br><br><a href='https://advising.sfsu.edu' target='_blank'>Undergraduate Advising Center →</a> &nbsp;·&nbsp; <a href='https://eop.sfsu.edu/academic-counseling' target='_blank'>EOP Academic Counseling →</a>"
   },
   {
     keywords: ['eop', 'opportunity program', 'first gen', 'first generation', 'support program'],
@@ -149,11 +151,11 @@ const FAQS = [
   },
   {
     keywords: ['gpa', 'grades', 'academic probation', 'academic standing', 'failing'],
-    answer: "<strong>GPA and Academic Standing:</strong><br><br>SF State requires a minimum 2.0 GPA to stay in good standing. If you fall below, meet with your advisor immediately — early action makes a real difference. Financial aid may also be affected.<br><br><a href='https://eop.sfsu.edu/advising' target='_blank'>Talk to an Advisor →</a>"
+    answer: "<strong>GPA and Academic Standing:</strong><br><br>SF State requires a minimum 2.0 GPA to stay in good standing. If you fall below, meet with your advisor immediately — early action makes a real difference. Financial aid may also be affected.<br><br><a href='https://advising.sfsu.edu' target='_blank'>Talk to an Advisor →</a>"
   },
   {
     keywords: ['tutor', 'tutoring', 'academic support', 'writing help', 'math help', 'study'],
-    answer: "<strong>Free Academic Support:</strong><br><br>SF State offers free tutoring through Student Academic Services, the Writing Center, and department programs.<br><br><a href='https://studentresources.sfsu.edu/resources' target='_blank'>Find Academic Resources →</a>"
+    answer: "<strong>Free Academic Support:</strong><br><br>SF State offers free tutoring and academic support through the Tutoring and Academic Support Center (TASC), plus department programs.<br><br><a href='https://tutoring.sfsu.edu' target='_blank'>Tutoring & Academic Support →</a>"
   },
   {
     keywords: ['housing', 'dorm', 'live on campus', 'residential', 'apartment'],
@@ -169,23 +171,23 @@ const FAQS = [
   },
   {
     keywords: ['dream act', 'undocumented', 'daca', 'ab540', 'cadaa', 'dreamer'],
-    answer: "<strong>Resources for Undocumented and AB540 Students:</strong><br><br>Apply for the <strong>California Dream Act (CADAA)</strong> instead of FAFSA to access state financial aid. SF State also has a Dreamers Resource Center with dedicated advising.<br><br><a href='https://dreamers.sfsu.edu' target='_blank'>Dreamers Resource Center →</a> &nbsp;·&nbsp; <a href='https://financialaid.sfsu.edu' target='_blank'>Dream Act Aid →</a>"
+    answer: "<strong>Resources for Undocumented and AB540 Students:</strong><br><br>Apply for the <strong>California Dream Act (CADAA)</strong> instead of FAFSA to access state financial aid. SF State also has a Dream Resource Center with dedicated advising.<br><br><a href='https://drc.sfsu.edu' target='_blank'>Dream Resource Center →</a> &nbsp;·&nbsp; <a href='https://financialaid.sfsu.edu/ab540' target='_blank'>AB 540 Financial Aid →</a>"
   },
   {
     keywords: ['visa', 'f-1', 'f1', 'j-1', 'international student services', 'iss', 'sevis', 'opt', 'cpt'],
-    answer: "<strong>International Student Visa Support:</strong><br><br>All F-1 and J-1 visa matters go through <strong>International Student Services (ISS)</strong>. Contact them for address changes, enrollment status, OPT/CPT authorization, and any status questions — never delay on visa matters.<br><br><a href='https://iss.sfsu.edu' target='_blank'>International Student Services →</a>"
+    answer: "<strong>International Student Visa Support:</strong><br><br>F-1 and J-1 visa matters are handled by SF State's <strong>Division of International Education</strong>. Use their visa, maintaining status, and advising pages for address changes, enrollment status, OPT/CPT authorization, and other status questions — never delay on visa matters.<br><br><a href='https://international.sfsu.edu/visa-and-immigration' target='_blank'>Visa & Immigration →</a> &nbsp;·&nbsp; <a href='https://international.sfsu.edu/maintaining-status' target='_blank'>Maintaining Status →</a> &nbsp;·&nbsp; <a href='https://international.sfsu.edu/contact-us' target='_blank'>Contact International Advising →</a>"
   },
   {
     keywords: ['health insurance', 'insurance', 'mandatory insurance'],
-    answer: "<strong>Health Insurance for International Students:</strong><br><br>International students are required to enroll in SF State's health insurance plan. You may request a waiver only if you have comparable coverage. Contact Student Health Services for details.<br><br><a href='https://health.sfsu.edu' target='_blank'>Student Health Services →</a>"
+    answer: "<strong>Health Insurance for International Students:</strong><br><br>F-1 international students, J-1 exchange students, and J-1 research scholars must purchase and maintain SF State pre-approved international student health insurance. Start with the Division of International Education health insurance page for current instructions.<br><br><a href='https://international.sfsu.edu/healthinsurance' target='_blank'>International Health Insurance →</a>"
   },
   {
     keywords: ['email', 'gatorlink', 'portal', 'login', 'account', 'canvas'],
-    answer: "<strong>Setting Up Your SF State Accounts:</strong><br><br>Your <strong>GatorLink account</strong> is your key to everything — email, Canvas, the Student Center, and more. Activate it as soon as you are admitted.<br><br><a href='https://its.sfsu.edu/gatorlink' target='_blank'>GatorLink Help →</a>"
+    answer: "<strong>Setting Up Your SF State Accounts:</strong><br><br>Your <strong>SFSU account</strong> gives you access to email, Canvas, the Student Center, Wi-Fi, and other university resources. Set up your account and multi-factor authentication as soon as you are admitted.<br><br><a href='https://web.sfsu.edu/account' target='_blank'>SFSU Account Help →</a>"
   },
 ];
 
-const FALLBACK = "I\'m not sure about that one. SF State\'s <a href=\"https://studentresources.sfsu.edu/resources\" target=\"_blank\">Student Resources page</a> is a good place to start, or visit the One Stop Enrollment Center on campus.";
+const FALLBACK = 'I\'m not sure about that one. SF State\'s <a href="https://studentresources.sfsu.edu/resources" target="_blank">Student Resources page</a> is a good place to start, or visit the One Stop Enrollment Center on campus.';
 
 const TAG_COLORS = {
   'Financial Aid':   ['#FFF3CD', '#7A5000'],

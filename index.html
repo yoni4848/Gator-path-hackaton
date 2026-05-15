@@ -679,6 +679,16 @@
     .message a { color: var(--gold-bright); font-weight: 600; }
     .message.user a { color: #d4b8ff; }
 
+    .answer-note {
+      display: block;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     .chat-suggestions {
       padding: 0 16px 8px;
       display: flex;
@@ -880,7 +890,7 @@
     <nav class="tab-bar" role="tablist">
       <button class="tab-btn active" data-tab="checklist" role="tab">My Path</button>
       <button class="tab-btn" data-tab="resources" role="tab">Resources</button>
-      <button class="tab-btn" data-tab="chat" role="tab">Ask Gator</button>
+      <button class="tab-btn" data-tab="chat" role="tab">FAQ Helper</button>
     </nav>
 
     <div class="panels">
@@ -916,7 +926,7 @@
       <div id="panel-chat" class="tab-panel" role="tabpanel">
         <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
           <div class="message bot">
-            <p>Hi! Ask me anything about SF State — FAFSA, advising, visas, declaring a major, graduation, and more.</p>
+            <p>Hi! I can match your question to a curated SF State FAQ topic. I am not live AI, so verify deadlines and requirements with the linked offices.</p>
           </div>
         </div>
         <div class="chat-suggestions" id="chat-suggestions" aria-label="Suggested questions">
@@ -926,7 +936,7 @@
           <button class="suggestion-chip">What about my visa?</button>
         </div>
         <div class="chat-input-row">
-          <input type="text" id="chat-input" placeholder="Ask a question…" autocomplete="off" aria-label="Type your question" />
+          <input type="text" id="chat-input" placeholder="Search FAFSA, advising, visas..." autocomplete="off" aria-label="Type your question" />
           <button id="chat-send" aria-label="Send">→</button>
         </div>
       </div>

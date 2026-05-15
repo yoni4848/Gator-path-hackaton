@@ -6,7 +6,7 @@
 
 ## What is this?
 
-SF State has a lot of great resources — but finding the right ones for your specific situation can be overwhelming, especially when you're just getting started. Gator Path asks you two simple questions and gives you a personalized checklist of steps to take, the right office links, and a chat assistant to answer your questions.
+SF State has a lot of great resources — but finding the right ones for your specific situation can be overwhelming, especially when you're just getting started. Gator Path asks you two simple questions and gives you a personalized checklist of steps to take, the right office links, and a curated FAQ helper for common questions.
 
 We built this because we wanted something that felt simple and helpful for any student, regardless of background.
 
@@ -15,8 +15,18 @@ We built this because we wanted something that felt simple and helpful for any s
 - **Onboarding flow** — two questions to personalize your experience
 - **My Path tab** — a checklist with progress tracking, tailored to your situation
 - **Resources tab** — curated links to the offices and services that matter for you
-- **Ask Gator tab** — a chat assistant that answers common SF State questions
+- **FAQ Helper tab** — a static, source-linked helper for common SF State questions
 - Your progress saves automatically so your checkboxes are there when you come back
+
+## Run locally
+
+This app is static HTML, CSS, and JavaScript. You can open `index.html` directly, or run a local server:
+
+```bash
+npm start
+```
+
+Then visit http://localhost:3000.
 
 ## How we built it
 

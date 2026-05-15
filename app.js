@@ -211,14 +211,89 @@
       done === total ? 'All ' + total + ' steps complete' : done + ' / ' + total + ' complete';
   }
 
-  function getBotResponse(input) {
-    var lower = input.toLowerCase();
-    for (var i = 0; i < FAQS.length; i++) {
-      for (var j = 0; j < FAQS[i].keywords.length; j++) {
-        if (lower.indexOf(FAQS[i].keywords[j]) !== -1) return FAQS[i].answer;
+  function normalizeText(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function getSearchTokens(value) {
+    var tokens = normalizeText(value).split(/\s+/).filter(Boolean);
+    var tokenMap = {};
+
+    tokens.forEach(function (token) {
+      tokenMap[token] = true;
+      if (token.length > 3 && token.slice(-1) === 's') {
+        tokenMap[token.slice(0, -1)] = true;
       }
+    });
+
+    return tokenMap;
+  }
+
+  function getKeywordScore(normalizedInput, inputTokens, keyword) {
+    var normalizedKeyword = normalizeText(keyword);
+    var keywordTokens;
+
+    if (!normalizedKeyword) return 0;
+
+    keywordTokens = normalizedKeyword.split(/\s+/).filter(Boolean);
+
+    if (keywordTokens.length > 1) {
+      if (normalizedInput.indexOf(normalizedKeyword) !== -1) {
+        return keywordTokens.length + 3;
+      }
+
+      return keywordTokens.every(function (token) { return inputTokens[token]; }) ? keywordTokens.length : 0;
     }
-    return FALLBACK;
+
+    return inputTokens[normalizedKeyword] ? 2 : 0;
+  }
+
+  function stripTags(html) {
+    return html.replace(/<[^>]*>/g, '').replace(/:$/, '');
+  }
+
+  function escapeHtml(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function getFaqTopic(faq) {
+    var match = faq.answer.match(/<strong>(.*?)<\/strong>/);
+    return match ? stripTags(match[1]) : 'SF State resources';
+  }
+
+  function addFaqDisclosure(answer, topic) {
+    return answer +
+      '<span class="answer-note">Matched FAQ topic: <strong>' + escapeHtml(topic) + '</strong>. ' +
+      'This is a curated static response, not live AI. Verify details with the linked SF State office.</span>';
+  }
+
+  function getFaqResponse(input) {
+    var normalizedInput = normalizeText(input);
+    var inputTokens = getSearchTokens(input);
+    var bestFaq = null;
+    var bestScore = 0;
+
+    FAQS.forEach(function (faq) {
+      var score = faq.keywords.reduce(function (total, keyword) {
+        return total + getKeywordScore(normalizedInput, inputTokens, keyword);
+      }, 0);
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestFaq = faq;
+      }
+    });
+
+    if (!bestFaq) {
+      return FALLBACK;
+    }
+
+    return addFaqDisclosure(bestFaq.answer, getFaqTopic(bestFaq));
   }
 
   function appendMessage(content, role, isHtml) {
@@ -243,7 +318,7 @@
     appendMessage(text, 'user', false);
     input.value = '';
     setTimeout(function () {
-      appendMessage(getBotResponse(text), 'bot', true);
+      appendMessage(getFaqResponse(text), 'bot', true);
     }, 280);
   }
 

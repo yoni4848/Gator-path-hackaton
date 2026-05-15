@@ -1,12 +1,9 @@
 {
   "name": "gator-path",
   "version": "1.0.0",
+  "description": "A personalized student navigation app for SF State students.",
   "type": "module",
   "scripts": {
     "start": "node server.js"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.50.4",
-    "express": "^4.18.2"
   }
 }
